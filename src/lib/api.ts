@@ -1,6 +1,8 @@
-import { da } from "date-fns/locale";
+import dotenv from 'dotenv';
 
-const API_URL = 'http://127.0.0.1:8000';
+dotenv.config();
+
+const API_URL = process.env.API_URL || 'http://127.0.0.1:8000';
 
 interface LoginCredentials {
   email: string;

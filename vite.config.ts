@@ -11,4 +11,7 @@ export default defineConfig({
     port: 3000,
     host: true, // Needed for Docker
   },
+  define: {
+    'import.meta.env.VITE_API_URL': JSON.stringify(process.env.VITE_API_URL || '')
+  }
 });

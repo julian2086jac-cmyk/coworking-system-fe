@@ -1,5 +1,5 @@
-const API_URL = import.meta.env.API_URL;
-console.log('API URL:', API_URL);
+const API_URL = import.meta.env.VITE_API_URL;
+console.log(import.meta.env)
 interface LoginCredentials {
   email: string;
   password: string;

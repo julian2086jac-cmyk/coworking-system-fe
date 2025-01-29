@@ -1,8 +1,4 @@
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-const API_URL = process.env.API_URL || 'http://127.0.0.1:8000';
+const API_URL = "https://coworking-system-be-test-593305950815.us-central1.run.app"
 
 interface LoginCredentials {
   email: string;

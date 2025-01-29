@@ -9,25 +9,24 @@ import Bookings from './pages/Bookings';
 import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import { useAuthStore } from './lib/store';
-import { supabase } from './lib/supabase';
+import { api } from './lib/api';
 
 function App() {
   const { setUser } = useAuthStore();
 
   useEffect(() => {
     // Verificar la sesión inicial
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-    });
+    const checkSession = async () => {
+      try {
+        const session = await api.auth.getSession();
+        setUser(session?.user ?? null);
+      } catch (error) {
+        console.error('Error checking session:', error);
+        setUser(null);
+      }
+    };
 
-    // Suscribirse a cambios en el estado de autenticación
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
+    checkSession();
   }, [setUser]);
 
   return (

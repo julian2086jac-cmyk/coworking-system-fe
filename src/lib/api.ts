@@ -1,5 +1,5 @@
-const API_URL = "https://coworking-system-be-test-593305950815.us-central1.run.app"
-
+const API_URL = import.meta.env.API_URL;
+console.log('API URL:', API_URL);
 interface LoginCredentials {
   email: string;
   password: string;

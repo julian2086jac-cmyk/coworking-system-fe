@@ -119,14 +119,16 @@ const handleApiError = async (response: Response): Promise<ErrorResponse> => {
   try {
     const errorData = await response.json();
     return {
-      message: errorData.message || 'Error en la operación',
+      message: response.status === 401
+        ? "Credenciales inválidas. Verifica tu correo y contraseña."
+        : errorData.message || "Error en la operación",
       statusCode: response.status
     };
   } catch (e) {
     return {
-      message: response.status === 405 
-        ? 'Método no permitido. Por favor, contacta al soporte técnico.' 
-        : 'Error de conexión con el servidor',
+      message: response.status === 405
+        ? "Método no permitido. Por favor, contacta al soporte técnico."
+        : "Error de conexión con el servidor",
       statusCode: response.status
     };
   }

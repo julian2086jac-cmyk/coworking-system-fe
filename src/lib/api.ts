@@ -170,14 +170,9 @@ export const api = {
 
     register: async (data: RegisterData) => {
       try {
-        const url = new URL(`${API_URL}/auth/register`);
-        url.searchParams.append('email', data.email);
-        url.searchParams.append('password', data.password);
-        url.searchParams.append('full_name', data.full_name);
-
-        const response = await fetch(url.toString(), {
+        const response = await fetch(`${API_URL}/auth/register`, {
           method: 'POST',
-          headers: getHeaders(true),
+          headers: getHeaders(false),
           mode: 'cors',
           body: JSON.stringify(data),
         });
